@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dr. Arlan Marques | Neurocirurgião em Manaus</title>
+    
+    <!-- Google Fonts: Montserrat and Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              slate: {
+                900: '#0f172a', // Background Main
+                950: '#020617', // Darker shades
+                800: '#1e293b', // Background Secondary
+                700: '#334155', // Borders
+                400: '#94a3b8', // Text Secondary
+                50: '#f8fafc',  // Text Main
+              },
+              sky: {
+                500: '#0ea5e9', // Primary Brand (Action)
+                600: '#0284c7', // Hover state
+                900: '#0c4a6e', // Subtle tint
+              },
+              // Paleta original do site WordPress (drarlanneuro.com),
+              // extraída do CSS do Elementor. Usada nas páginas do site
+              // principal (home, neurocirurgiao, bio) para alternar seções
+              // claras/escuras como no site original. Ver PLANEJAMENTO.md.
+              brand: {
+                navy: '#112640',    // seções escuras de destaque
+                blue: '#386FA3',    // blocos secundários / botões
+                accent: '#3165AF',  // seção "pós-graduação"
+                dark: '#1C1F1E',    // seção de contato
+                soft: '#F2F2F2',    // seções neutras alternadas
+              }
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              heading: ['Montserrat', 'sans-serif'],
+            },
+            borderRadius: {
+              'xl': '0.75rem',
+              '2xl': '1rem',
+            },
+            animation: {
+              marquee: 'marquee 40s linear infinite',
+              float: 'float 5s ease-in-out infinite',
+              shimmer: 'shimmer 3s infinite',
+            },
+            keyframes: {
+              marquee: {
+                '0%': { transform: 'translateX(0)' },
+                '100%': { transform: 'translateX(-100%)' },
+              },
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-10px)' },
+              },
+              shimmer: {
+                '0%': { transform: 'translateX(-100%)' },
+                '100%': { transform: 'translateX(100%)' },
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      /* Custom scrollbar for webkit */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f1f5f9;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+      }
+
+      /* Utilities */
+      .backdrop-blur-md {
+        backdrop-filter: blur(12px);
+      }
+    </style>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="antialiased selection:bg-sky-500/30 selection:text-sky-200 overflow-x-hidden">
+    <div id="root"></div>
+<script type="module" src="/src/main.tsx"></script>
+</body>
+</html>

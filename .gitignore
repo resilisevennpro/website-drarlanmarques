@@ -1,0 +1,35 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+.env
+.env.local
+.env.*.local
+
+# Backups do WordPress usados só para a migração (ver PLANEJAMENTO.md).
+# Não fazem parte do código do site e são grandes demais para o Git.
+u271861479.20260908195628.tar.gz
+u271861479_V2ann.20260908195628.sql.gz
+
+# Configuração local do Claude Code
+.claude/
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
