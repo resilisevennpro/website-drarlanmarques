@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from "framer-motion";
 import { buildWhatsappLink } from '../lib/whatsapp';
+import { Seo, physicianSchema, faqSchema } from '../components/Seo';
 
 import { 
   Menu, 
@@ -22,6 +23,37 @@ import {
 
 // --- Constants ---
 const WHATSAPP_LINK = buildWhatsappLink("Olá, vim através do site de *Enxaqueca e Dores de Cabeça* e gostaria de mais informações sobre a Consulta com o Dr Arlan...");
+
+const FAQS = [
+  {
+    q: "Botox para enxaqueca é o mesmo da estética?",
+    a: "A substância é a mesma, mas os pontos de aplicação e as doses são técnicos e focados em nervos específicos da dor, diferindo completamente do uso estético."
+  },
+  {
+    q: "Dr. Arlan atende convênios?",
+    a: "O foco é o atendimento particular personalizado para garantir o tempo e a atenção necessários, mas fornecemos nota e relatório detalhado para solicitação de reembolso junto ao seu convênio."
+  },
+  {
+    q: "Vou precisar de cirurgia na cabeça?",
+    a: "Na grande maioria dos casos de enxaqueca, o tratamento é 100% clínico e não cirúrgico. A cirurgia é considerada apenas em situações muito específicas e raras."
+  },
+  {
+    q: "Por que devo tratar minha dor de cabeça com um neurocirurgião e não com um clínico geral?",
+    a: "A formação em neurocirurgia do Dr. Arlan, com especialização na USP, oferece uma visão muito mais profunda da anatomia dos nervos e do crânio. Isso permite diagnósticos de precisão cirúrgica para aplicar tratamentos clínicos (como os bloqueios e a neuromodulação) exatamente onde a dor nasce, algo que um clínico geral muitas vezes não consegue mapear."
+  },
+  {
+    q: "Eu já tomo muitos analgésicos. Esse tratamento vai me fazer parar de tomar remédios?",
+    a: "O objetivo principal é interromper o \"ciclo do rebote\", onde você toma remédio para a dor, mas ele acaba gerando uma nova crise dias depois. Através da Toxina Botulínica ou Neuromodulação, buscamos reduzir a sua dependência de medicações orais, tratando a causa neurológica e não apenas mascarando o sintoma"
+  },
+  {
+    q: "Quanto tempo dura o efeito dos tratamentos como Botox ou Neuromodulação?",
+    a: "O foco do Dr. Arlan Marques é proporcionar períodos prolongados de liberdade e qualidade de vida. No caso da Toxina Botulínica, os resultados costumam durar entre 3 a 4 meses, dependendo do organismo. Já a Neuromodulação busca \"reeducar\" o sistema nervoso para um controle de dor a longo prazo. O objetivo é que você esqueça que a dor existe, e não que precise voltar à clínica toda semana."
+  },
+  {
+    q: "Infiltrações e Bloqueios são seguros?",
+    a: "Totalmente seguros quando realizados por um especialista com o currículo do Dr. Arlan. Como neurocirurgião formado pela UFAM com subespecialidade na USP/SP, ele possui um domínio profundo da anatomia dos nervos. Além disso, os procedimentos são guiados por imagem (ultrassom ou raio-x), garantindo que a medicação atinja o ponto exato da dor com precisão milimétrica, sem riscos para as estruturas ao redor."
+  }
+];
 
 // --- Components ---
 
@@ -197,7 +229,7 @@ const Hero = () => {
             <span className="text-xs font-medium text-slate-600">Dr. Arlan Marques | CRM 4862 | RQE 2634</span>
           </div>
 
-          <h1 className="font-heading font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl leading-tight mb-6 text-slate-900">
+          <h1 className="font-heading font-bold text-2xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl leading-tight mb-6 text-slate-900">
             Sua vida não pode parar em um <span className="text-sky-600">quarto escuro!</span>
           </h1>
 
@@ -410,7 +442,7 @@ const ComparisonTable = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 mt-24">
         <div className="bg-slate-50 rounded-3xl border border-slate-200 p-1 md:p-8 backdrop-blur-sm shadow-xl">
           <div className="text-center mb-10 pt-8 md:pt-0 px-4">
-            <h2 className="font-heading font-bold text-2xl md:text-3xl text-slate-900">Por que buscar um especialista?</h2>
+            <h2 className="font-heading font-bold text-xl md:text-3xl text-slate-900">Por que buscar um especialista?</h2>
           </div>
 
           {/* Desktop Table View */}
@@ -663,6 +695,7 @@ const Authority = () => {
               <img
                 src="/images/drarlan-hospital.jpg"
                 alt="Dr. Arlan Marques"
+                loading="lazy"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -742,7 +775,7 @@ const Location = () => {
                 }
               `}
             >
-              <img src={src} alt={`Consultório ${idx + 1}`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              <img src={src} alt={`Consultório ${idx + 1}`} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
             </div>
           )
         })}
@@ -759,7 +792,7 @@ const Location = () => {
            <div className="flex animate-marquee shrink-0">
              {images.map((src, idx) => (
                 <div key={`track1-${idx}`} className="w-72 h-64 flex-shrink-0 mx-2 rounded-xl overflow-hidden border border-slate-200 relative">
-                  <img src={src} alt="Consultório" className="w-full h-full object-cover" />
+                  <img src={src} alt="Consultório" loading="lazy" className="w-full h-full object-cover" />
                 </div>
              ))}
            </div>
@@ -767,7 +800,7 @@ const Location = () => {
            <div className="flex animate-marquee shrink-0">
              {images.map((src, idx) => (
                 <div key={`track2-${idx}`} className="w-72 h-64 flex-shrink-0 mx-2 rounded-xl overflow-hidden border border-slate-200 relative">
-                  <img src={src} alt="Consultório" className="w-full h-full object-cover" />
+                  <img src={src} alt="Consultório" loading="lazy" className="w-full h-full object-cover" />
                 </div>
              ))}
            </div>
@@ -808,7 +841,7 @@ const Location = () => {
         <div className="relative h-full min-h-[300px] w-full rounded-xl overflow-hidden bg-slate-200 flex items-center justify-center group cursor-pointer">
            {/* Placeholder for Map */}
            <div className="absolute inset-0 bg-white opacity-40 z-10 group-hover:opacity-20 transition-opacity"></div>
-           <img src="/images/googlemaps.webp" alt="Mapa" className="absolute inset-0 w-full h-full object-cover blur-[2px]" />
+           <img src="/images/googlemaps.webp" alt="Mapa" loading="lazy" className="absolute inset-0 w-full h-full object-cover blur-[2px]" />
            <Button className="relative z-20 shadow-xl" icon={MapPin}>
               CLIQUE PARA ABRIR NO GOOGLE MAPS
            </Button>
@@ -821,45 +854,14 @@ const Location = () => {
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  const faqs = [
-    {
-      q: "Botox para enxaqueca é o mesmo da estética?",
-      a: "A substância é a mesma, mas os pontos de aplicação e as doses são técnicos e focados em nervos específicos da dor, diferindo completamente do uso estético."
-    },
-    {
-      q: "Dr. Arlan atende convênios?",
-      a: "O foco é o atendimento particular personalizado para garantir o tempo e a atenção necessários, mas fornecemos nota e relatório detalhado para solicitação de reembolso junto ao seu convênio."
-    },
-    {
-      q: "Vou precisar de cirurgia na cabeça?",
-      a: "Na grande maioria dos casos de enxaqueca, o tratamento é 100% clínico e não cirúrgico. A cirurgia é considerada apenas em situações muito específicas e raras."
-    },
-    {
-      q: "Por que devo tratar minha dor de cabeça com um neurocirurgião e não com um clínico geral?",
-      a: "A formação em neurocirurgia do Dr. Arlan, com especialização na USP, oferece uma visão muito mais profunda da anatomia dos nervos e do crânio. Isso permite diagnósticos de precisão cirúrgica para aplicar tratamentos clínicos (como os bloqueios e a neuromodulação) exatamente onde a dor nasce, algo que um clínico geral muitas vezes não consegue mapear."
-    },
-    {
-      q: "Eu já tomo muitos analgésicos. Esse tratamento vai me fazer parar de tomar remédios?",
-      a: "O objetivo principal é interromper o \"ciclo do rebote\", onde você toma remédio para a dor, mas ele acaba gerando uma nova crise dias depois. Através da Toxina Botulínica ou Neuromodulação, buscamos reduzir a sua dependência de medicações orais, tratando a causa neurológica e não apenas mascarando o sintoma"
-    },
-    {
-      q: "Quanto tempo dura o efeito dos tratamentos como Botox ou Neuromodulação?",
-      a: "O foco do Dr. Arlan Marques é proporcionar períodos prolongados de liberdade e qualidade de vida. No caso da Toxina Botulínica, os resultados costumam durar entre 3 a 4 meses, dependendo do organismo. Já a Neuromodulação busca \"reeducar\" o sistema nervoso para um controle de dor a longo prazo. O objetivo é que você esqueça que a dor existe, e não que precise voltar à clínica toda semana."
-    },
-    {
-      q: "Infiltrações e Bloqueios são seguros?",
-      a: "Totalmente seguros quando realizados por um especialista com o currículo do Dr. Arlan. Como neurocirurgião formado pela UFAM com subespecialidade na USP/SP, ele possui um domínio profundo da anatomia dos nervos. Além disso, os procedimentos são guiados por imagem (ultrassom ou raio-x), garantindo que a medicação atinja o ponto exato da dor com precisão milimétrica, sem riscos para as estruturas ao redor."
-    }
-  ];
-
   return (
     <Section className="max-w-4xl mx-auto bg-white">
       <div className="text-center mb-12">
-        <h2 className="font-heading font-bold text-3xl text-slate-900 mb-4">Dúvidas Frequentes</h2>
+        <h2 className="font-heading font-bold text-xl md:text-3xl text-slate-900 mb-4">Dúvidas Frequentes</h2>
       </div>
 
       <div className="space-y-4">
-        {faqs.map((faq, idx) => (
+        {FAQS.map((faq, idx) => (
           <div
             key={idx}
             className="border border-brand-navy rounded-xl bg-brand-navy overflow-hidden transition-all duration-300"
@@ -923,6 +925,12 @@ const Footer = () => {
 export default function EnxaquecaPage() {
   return (
     <main className="bg-white min-h-screen font-sans selection:bg-sky-500 selection:text-white overflow-x-hidden">
+      <Seo
+        title="Tratamento de Enxaqueca e Dores de Cabeça em Manaus | Dr. Arlan Marques"
+        description="Tratamentos de alta precisão para enxaqueca e dores crônicas de cabeça em Manaus, sem cirurgia: toxina botulínica, bloqueios e neuromodulação, com o neurocirurgião Dr. Arlan Marques."
+        path="/enxaqueca"
+        jsonLd={[physicianSchema, faqSchema(FAQS)]}
+      />
       <Navbar />
       <Hero />
       <InfiniteMarquee />

@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import EnxaquecaPage from './pages/EnxaquecaPage';
 import HomePage from './pages/HomePage';
 import NeurocirurgiaoPage from './pages/NeurocirurgiaoPage';
@@ -17,17 +18,23 @@ export default function App() {
   const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
 
   if (isLpHost(hostname)) {
-    return <EnxaquecaPage />;
+    return (
+      <HelmetProvider>
+        <EnxaquecaPage />
+      </HelmetProvider>
+    );
   }
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/neurocirurgiao" element={<NeurocirurgiaoPage />} />
-        <Route path="/bio" element={<BioPage />} />
-        <Route path="/enxaqueca" element={<EnxaquecaPage />} />
-      </Routes>
-    </BrowserRouter>
+    <HelmetProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/neurocirurgiao" element={<NeurocirurgiaoPage />} />
+          <Route path="/bio" element={<BioPage />} />
+          <Route path="/enxaqueca" element={<EnxaquecaPage />} />
+        </Routes>
+      </BrowserRouter>
+    </HelmetProvider>
   );
 }

@@ -4,8 +4,10 @@ import { Section, Button } from '../components/ui';
 import { SobreDrArlan } from '../components/SobreDrArlan';
 import { CuidadoAlemDaNeurocirurgia } from '../components/CuidadoAlemDaNeurocirurgia';
 import { LocalAtendimento } from '../components/LocalAtendimento';
+import { AtendimentoParticular } from '../components/AtendimentoParticular';
 import { Contato } from '../components/Contato';
 import { Hero } from '../components/Hero';
+import { Seo, physicianSchema, breadcrumbSchema } from '../components/Seo';
 import { CheckCircle2, Quote } from 'lucide-react';
 import { buildWhatsappLink } from '../lib/whatsapp';
 
@@ -88,6 +90,18 @@ export default function NeurocirurgiaoPage() {
 
   return (
     <SiteLayout whatsappMessage={WHATSAPP_MSG}>
+      <Seo
+        title="Cirurgia de Coluna e Hérnia de Disco em Manaus | Dr. Arlan Marques"
+        description="Referência em cirurgia de coluna e hérnia de disco em Manaus. Técnicas minimamente invasivas (endoscopia, microcirurgia) para cervical e lombar, com Dr. Arlan Marques, neurocirurgião."
+        path="/neurocirurgiao"
+        jsonLd={[
+          physicianSchema,
+          breadcrumbSchema([
+            { name: 'Início', path: '/' },
+            { name: 'Neurocirurgia', path: '/neurocirurgiao' },
+          ]),
+        ]}
+      />
       <Hero
         title="Referência em Cirurgia de Coluna e Hérnia de Disco em Manaus"
         description={
@@ -102,33 +116,52 @@ export default function NeurocirurgiaoPage() {
       />
 
       {/* Experiência */}
-      <div className="bg-brand-navy">
-        <Section className="text-center">
-          <h2 className="font-heading text-2xl md:text-3xl font-bold text-white mb-1">Dr Arlan Marques</h2>
-          <p className="text-sky-400 font-medium mb-6">Mais de 13 anos de experiência em Neurocirurgia de Alta Complexidade</p>
-          <p className="text-slate-300 max-w-3xl mx-auto leading-relaxed">
-            Dr. Arlan Marques une sólida formação acadêmica à prática constante em cirurgias de coluna.
-          </p>
-          <p className="text-slate-300 max-w-3xl mx-auto leading-relaxed mt-2">
-            O foco do atendimento é oferecer um diagnóstico preciso e indicar a intervenção
-            cirúrgica apenas quando necessário, priorizando técnicas como Endoscopia de Coluna
-            e Microcirurgia, que proporcionam cortes menores, menos dor pós-operatória e retorno
-            rápido à rotina.
-          </p>
+      <div className="bg-brand-navy border-t border-white/10">
+        <Section className="py-12 md:py-14">
+          <div className="grid md:grid-cols-[auto_1fr] gap-8 md:gap-16 items-center">
+            <div className="hidden md:flex md:flex-col items-start justify-center md:border-r md:border-white/10 md:pr-16">
+              <span className="font-heading text-6xl md:text-7xl font-black text-white leading-none tracking-tight">
+                <span className="text-sky-400">+</span>13
+              </span>
+              <span className="text-sky-400 font-medium uppercase tracking-wide text-sm md:text-base">
+                anos de experiência
+              </span>
+            </div>
+
+            <div>
+              <h2 className="font-heading text-xl md:text-3xl font-bold text-white mb-4">
+                <span className="md:hidden">
+                  <span className="text-sky-400">+</span>13 Anos de Experiência em Neurocirurgia
+                </span>
+                <span className="hidden md:inline">Dr Arlan Marques</span>
+              </h2>
+              <p className="text-slate-300 leading-relaxed">
+                Dr. Arlan Marques une sólida formação acadêmica à prática constante em cirurgias de coluna.
+              </p>
+              <p className="text-slate-300 leading-relaxed mt-3">
+                O foco do atendimento é oferecer um diagnóstico preciso e indicar a intervenção
+                cirúrgica apenas quando necessário, priorizando técnicas como Endoscopia de Coluna
+                e Microcirurgia, que proporcionam cortes menores, menos dor pós-operatória e retorno
+                rápido à rotina.
+              </p>
+            </div>
+          </div>
+
+          <AtendimentoParticular />
         </Section>
       </div>
 
       {/* Diagnóstico e Sintomas */}
       <Section id="sintomas">
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-slate-900 mb-2">
+          <h2 className="font-heading text-2xl md:text-4xl font-bold text-slate-900 mb-2">
             Condições da Coluna e Sintomas de Alerta
           </h2>
           <p className="text-slate-600">Saiba quando é a hora de buscar uma avaliação especializada.</p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
-          <div>
+          <div className="border border-slate-300 rounded-2xl p-6">
             <h3 className="text-sky-600 font-heading font-bold uppercase text-sm tracking-wide mb-4">Diagnóstico</h3>
             <ul className="space-y-4">
               {DIAGNOSTICOS.map((d) => (
@@ -139,7 +172,7 @@ export default function NeurocirurgiaoPage() {
               ))}
             </ul>
           </div>
-          <div>
+          <div className="border border-slate-300 rounded-2xl p-6">
             <h3 className="text-sky-600 font-heading font-bold uppercase text-sm tracking-wide mb-4">Sintomas</h3>
             <ul className="space-y-4">
               {SINTOMAS.map((s) => (
@@ -155,14 +188,14 @@ export default function NeurocirurgiaoPage() {
 
       {/* Tratamentos e Cirurgias */}
       <Section id="tratamentos">
-        <h2 className="font-heading text-3xl md:text-4xl font-bold text-slate-900 text-center mb-12">
+        <h2 className="font-heading text-2xl md:text-4xl font-bold text-slate-900 text-center mb-12">
           Tratamentos Especializados e Cirurgias da Coluna
         </h2>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {TRATAMENTOS.map((t) => (
             <div key={t.titulo} className="bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden">
-              <img src={t.imagem} alt={t.titulo} className="w-full h-40 object-cover" />
+              <img src={t.imagem} alt={t.titulo} loading="lazy" className="w-full h-40 object-cover saturate-60 grayscale-[25%] contrast-90" />
               <div className="p-6">
                 <h3 className="font-heading text-lg font-bold text-slate-900 mb-2">{t.titulo}</h3>
                 <p className="text-slate-600 text-sm leading-relaxed">{t.texto}</p>
@@ -190,16 +223,16 @@ export default function NeurocirurgiaoPage() {
       </Section>
 
       {/* Depoimentos */}
-      <div className="bg-brand-navy">
+      <div className="bg-white">
         <Section>
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-2">DEPOIMENTOS</h2>
-            <p className="text-slate-300">Confira o que diz os Pacientes!</p>
+            <h2 className="font-heading text-2xl md:text-4xl font-bold text-slate-900 mb-2">DEPOIMENTOS</h2>
+            <p className="text-slate-600">Confira o que diz os Pacientes!</p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
             {DEPOIMENTOS.map((d) => (
-              <div key={d.nome} className="bg-white/5 border border-white/10 rounded-2xl p-6">
+              <div key={d.nome} className="bg-brand-navy border border-white/10 rounded-2xl p-6">
                 <Quote className="w-6 h-6 text-sky-400 mb-3" />
                 <p className="text-slate-300 text-sm leading-relaxed whitespace-pre-line mb-4">{d.texto}</p>
                 <p className="text-white font-medium text-sm">Paciente {d.nome}</p>

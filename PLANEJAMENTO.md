@@ -177,16 +177,81 @@ reutilizado pelas 3 páginas — só mudam título, descrição e CTA.
       partir da copy extraída (fidelidade de conteúdo, visual atualizado)
 - [ ] Implementar detecção de hostname para `lp.drarlanneuro.com`
 - [ ] Testar localmente as 4 URLs (3 rotas do domínio principal + a LP)
-- [ ] Conectar ao repositório Git já criado pelo cliente:
+- [x] Conectar ao repositório Git já criado pelo cliente:
       `https://github.com/resilisevennpro/website-drarlanmarques.git`
-      (branch `main`, sem branches extras — conforme regra do cliente)
+      (branch `main`, sem branches extras — conforme regra do cliente).
+      Repositório inicializado, primeiro commit publicado em `origin/main`.
 - [ ] Configurar projeto na Vercel apontando para esse repositório
 - [ ] **Aguardar aprovação explícita antes de**: apontar DNS, fazer deploy
       em produção, ou desligar/remover o ambiente Docker de conferência
 - [ ] Após ar no ar: cancelar/não renovar a hospedagem Hostinger (decisão do
       cliente, não assumir)
 
-## 8. Notas técnicas para quem for codar
+## 8. Tags de rastreamento (GTM, Google Ads, Meta)
+
+No WordPress original, essas tags eram injetadas globalmente (todas as
+páginas) pelo plugin **Insert Headers and Footers** — não apareciam no HTML
+renderizado de cada página, então passaram despercebidas na primeira
+extração de conteúdo. Encontradas via consulta direta ao banco
+(`wp_options`, chaves `ihaf_insert_header`/`ihaf_insert_body`) e já
+adicionadas ao `index.html` do projeto novo (aplicam-se a todas as rotas,
+incluindo a LP de enxaqueca):
+
+- **Google Tag Manager:** `GTM-P6QVWJXD`
+- **Google Ads (gtag):** `AW-16820037515`
+- **Meta (Facebook) domain verification:** `22clskwacs6jedaaoo6zfxgak650va`
+
+## 8.1 Auditoria de itens que não apareciam na copy extraída
+
+Verificação adicional em 2026-09-12, comparando com o WordPress original
+(banco de dados + HTML renderizado) para achar o que poderia ter ficado de
+fora da migração:
+
+- **Link "Agende através do WhatsApp" do bloco de Contato:** no original
+  esse link específico (diferente do botão "Agendar Agora" logo abaixo)
+  abria o WhatsApp **sem mensagem pré-preenchida**
+  (`.../send/?phone=...`, sem `&text=`). Corrigido em `Contato.tsx`.
+- **Favicon:** existia (`cropped-logo-02`, 32x32 e 192x192) e não tinha
+  sido migrado. Adicionado ao `index.html`.
+- **Meta description / Open Graph:** conferido — **não existiam** no site
+  original, não é uma perda da migração.
+- **Botão flutuante de WhatsApp (plugin Joinchat):** no WordPress só
+  aparecia na página inicial (`front_page` = a Home, copy de dores
+  crônicas/agudas — não a LP de enxaqueca). Hoje só existia na
+  `EnxaquecaPage`. Criado `WhatsappFloatButton.tsx` e adicionado também
+  à `HomePage`, mantendo fiel ao comportamento original (só nessa página).
+
+## 8.2 Otimização SEO / GEO / AEO (2026-09-12)
+
+Implementado com `react-helmet-async` (`src/components/Seo.tsx`), aplicado
+em cada página via `<Seo />`:
+
+1. **Meta tags dinâmicas por rota**: `<title>`, meta description, Open
+   Graph (og:title/description/image/url), Twitter Card — cada página tem
+   as suas, geradas a partir da copy real (não genéricas).
+2. **Dados estruturados JSON-LD (schema.org)**:
+   - `Physician` (dados do Dr. Arlan: CRM/RQE, endereço, especialidade,
+     formação) em todas as páginas do site principal.
+   - `FAQPage` na LP de enxaqueca, usando as mesmas perguntas do
+     acordeão de FAQ visível (schema não duplica conteúdo, referencia o
+     que já existe na página).
+   - `BreadcrumbList` em Home e Neurocirurgião.
+3. **`/robots.txt` e `/sitemap.xml`** (pasta `public/`). O sitemap lista
+   `/` e `/neurocirurgiao` — `/bio` foi deixada de fora de propósito
+   (ver item 4) e a LP de enxaqueca fica em domínio à parte
+   (`lp.drarlanneuro.com`), sem sitemap dedicado por simplicidade.
+4. **Canonical para conteúdo duplicado**: `/bio` tem o mesmo conteúdo da
+   home (ver seção 3) — `<Seo canonicalPath="/">` evita penalização por
+   conteúdo duplicado, apontando o Google para a versão canônica.
+5. **Acessibilidade semântica**: confirmada hierarquia correta de heading
+   (1×`<h1>` por página, vindo do componente `Hero`, seguido de `<h2>`/
+   `<h3>` em ordem); alt text descritivo em todas as imagens (nunca vazio
+   ou genérico).
+6. **Performance**: `loading="lazy"` em todas as imagens que não são LCP
+   (tudo exceto a imagem de fundo do Hero, que é crítica).
+7. **Favicon**: adicionado (ver seção 8.1).
+
+## 9. Notas técnicas para quem for codar
 
 - As imagens originais estão em
   `wp-restore/wp-data/wp-content/uploads/2025/...` (alta resolução, `.webp`/

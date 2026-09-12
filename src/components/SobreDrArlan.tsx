@@ -14,7 +14,7 @@ export const SobreDrArlan = () => (
   <div className="bg-brand-navy">
     <Section id="sobre" className="grid md:grid-cols-2 gap-12 items-center">
       <div>
-        <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-1">Dr. Arlan Marques</h2>
+        <h2 className="font-heading text-2xl md:text-4xl font-bold text-white mb-1">Dr. Arlan Marques</h2>
         <p className="text-sky-400 font-medium mb-6">CRM 4962 | RQE 2634</p>
 
         <p className="text-slate-300 leading-relaxed mb-6">
@@ -44,8 +44,8 @@ export const SobreDrArlan = () => (
         </a>
       </div>
 
-      <div className="rounded-2xl overflow-hidden">
-        <img src="/images/wp/drarlan-bg10.webp" alt="Dr. Arlan Marques" className="w-full h-full object-cover" />
+      <div className="rounded-2xl overflow-hidden md:max-w-sm md:justify-self-end">
+        <img src="/images/wp/drarlan-bg10.webp" alt="Dr. Arlan Marques" loading="lazy" className="w-full h-full object-cover" />
       </div>
     </Section>
   </div>

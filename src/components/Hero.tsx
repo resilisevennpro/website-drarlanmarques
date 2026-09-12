@@ -29,6 +29,9 @@ export const Hero = ({
     {/* No desktop, reforço de escurecimento à esquerda para o texto não competir com o rosto na foto */}
     <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-brand-navy/70 via-brand-navy/20 to-transparent" />
     <div className="relative z-10 max-w-3xl py-16 md:py-20">
+      <span className="inline-block px-3 py-1 rounded-full bg-white/10 border border-white/20 text-sky-300 text-xs md:text-sm font-semibold tracking-wide uppercase mb-4">
+        Atendimento Particular
+      </span>
       <h1 className="font-heading text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
         {title}
       </h1>
