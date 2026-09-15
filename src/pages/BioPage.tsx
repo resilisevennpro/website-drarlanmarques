@@ -58,7 +58,7 @@ export default function BioPage() {
     <SiteLayout whatsappMessage={WHATSAPP_MSG}>
       <Seo
         title="Dr. Arlan Marques | Especialista em Dores Crônicas e Agudas em Manaus"
-        description="Neurocirurgião especialista em tratamentos clínicos e não cirúrgicos para enxaqueca, dor lombar e articulações. Atendimento em Manaus – AM. Mais de 13 anos de experiência."
+        description="Neurocirurgião especialista em tratamentos clínicos e não cirúrgicos para enxaqueca, dor lombar e articulações. Atendimento em Manaus – AM. Mais de 15 anos de experiência."
         path="/bio"
         canonicalPath="/"
       />
@@ -67,6 +67,12 @@ export default function BioPage() {
         description="Dr. Arlan Marques – Neurocirurgião especialista em tratamentos clínicos e não cirúrgicos para Enxaqueca, dor na Lombar, Articulações etc. Atendimento em Manaus – AM!"
         ctaLabel="Agendar pelo WhatsApp"
         ctaHref={whatsappLink}
+        image="/images/dr-arlan-02.webp"
+        imageMobile="/images/dr-arlan-02.webp"
+        imagePosition="60% 25%"
+        imagePositionMobile="56% 12%"
+        topSpacingMobile="pt-44"
+        titleSizeMobile="text-[1.3rem]"
       />
 
       {/* Experiência */}
@@ -75,7 +81,7 @@ export default function BioPage() {
           <div className="grid md:grid-cols-[auto_1fr] gap-8 md:gap-16 items-center">
             <div className="hidden md:flex md:flex-col items-start justify-center md:border-r md:border-white/10 md:pr-16">
               <span className="font-heading text-6xl md:text-7xl font-black text-white leading-none tracking-tight">
-                <span className="text-sky-400">+</span>13
+                <span className="text-sky-400">+</span>15
               </span>
               <span className="text-sky-400 font-medium uppercase tracking-wide text-sm md:text-base">
                 anos de experiência
@@ -85,7 +91,7 @@ export default function BioPage() {
             <div>
               <h2 className="font-heading text-xl md:text-3xl font-bold text-white mb-4">
                 <span className="md:hidden">
-                  <span className="text-sky-400">+</span>13 Anos de Experiência
+                  <span className="text-sky-400">+</span>15 Anos de Experiência
                 </span>
                 <span className="hidden md:inline">Dr Arlan Marques</span>
               </h2>

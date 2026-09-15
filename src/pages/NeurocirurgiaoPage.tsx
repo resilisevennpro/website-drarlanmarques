@@ -121,7 +121,7 @@ export default function NeurocirurgiaoPage() {
           <div className="grid md:grid-cols-[auto_1fr] gap-8 md:gap-16 items-center">
             <div className="hidden md:flex md:flex-col items-start justify-center md:border-r md:border-white/10 md:pr-16">
               <span className="font-heading text-6xl md:text-7xl font-black text-white leading-none tracking-tight">
-                <span className="text-sky-400">+</span>13
+                <span className="text-sky-400">+</span>15
               </span>
               <span className="text-sky-400 font-medium uppercase tracking-wide text-sm md:text-base">
                 anos de experiência
@@ -131,7 +131,7 @@ export default function NeurocirurgiaoPage() {
             <div>
               <h2 className="font-heading text-xl md:text-3xl font-bold text-white mb-4">
                 <span className="md:hidden">
-                  <span className="text-sky-400">+</span>13 Anos de Experiência em Neurocirurgia
+                  <span className="text-sky-400">+</span>15 Anos de Experiência em Neurocirurgia
                 </span>
                 <span className="hidden md:inline">Dr Arlan Marques</span>
               </h2>

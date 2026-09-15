@@ -153,8 +153,8 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          <div className="flex-shrink-0 font-heading font-bold text-xl md:text-2xl text-slate-900">
+        <div className="flex items-center justify-between h-20 md:h-16">
+          <div className="flex-shrink-0 font-heading font-bold text-xl text-slate-900">
             Dr. Arlan <span className="text-sky-600">Marques</span>
           </div>
 
@@ -222,7 +222,7 @@ const Hero = () => {
       <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-sky-200/30 blur-[120px] rounded-full pointer-events-none z-0"></div>
 
       {/* Left Content (Text) - Simulating the grid container alignment */}
-      <div className="w-full md:w-1/2 flex flex-col justify-center px-4 md:pl-12 lg:pl-20 pt-28 md:pt-20 pb-12 relative z-10">
+      <div className="w-full md:w-1/2 flex flex-col justify-center px-4 md:pl-12 lg:pl-20 pt-28 md:pt-16 pb-12 relative z-10">
         <div className="max-w-xl lg:max-w-2xl w-full mx-auto md:mr-8 md:ml-auto text-center md:text-left">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 border border-slate-200 mb-6 backdrop-blur-sm mx-auto md:mx-0">
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
@@ -709,7 +709,7 @@ const Authority = () => {
 
             <div className="space-y-6 text-slate-700 text-lg leading-relaxed">
               <p>
-                Dr. Arlan Marques é médico neurocirurgião formado pela Universidade Federal do Amazonas (UFAM), com mais de <strong className="text-sky-600">13 anos de atuação especializada</strong> no sistema nervoso e no controle da dor. Sua trajetória é marcada pela excelência técnica, com residência médica em Neurocirurgia pelo HUGV e subespecialização em Neuro-oncologia pelo prestigiado Hospital das Clínicas da USP (São Paulo).
+                Dr. Arlan Marques é médico neurocirurgião formado pela Universidade Federal do Amazonas (UFAM), com mais de <strong className="text-sky-600">15 anos de atuação especializada</strong> no sistema nervoso e no controle da dor. Sua trajetória é marcada pela excelência técnica, com residência médica em Neurocirurgia pelo HUGV e subespecialização em Neuro-oncologia pelo prestigiado Hospital das Clínicas da USP (São Paulo).
               </p>
               <p>
                 Aliando o rigor acadêmico à inovação, possui pós-graduação em Tratamento da Dor pela SINPAIN, o que o permite oferecer as técnicas mais modernas para o alívio de enxaquecas e dores crônicas sem a necessidade imediata de intervenções invasivas.

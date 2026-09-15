@@ -5,6 +5,7 @@ import EnxaquecaPage from './pages/EnxaquecaPage';
 import HomePage from './pages/HomePage';
 import NeurocirurgiaoPage from './pages/NeurocirurgiaoPage';
 import BioPage from './pages/BioPage';
+import LinksPage from './pages/LinksPage';
 
 // lp.drarlanneuro.com serve apenas a landing page de enxaqueca (sem menu
 // nem rotas do site principal). Qualquer outro host (drarlanneuro.com,
@@ -32,6 +33,7 @@ export default function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/neurocirurgiao" element={<NeurocirurgiaoPage />} />
           <Route path="/bio" element={<BioPage />} />
+          <Route path="/links" element={<LinksPage />} />
           <Route path="/enxaqueca" element={<EnxaquecaPage />} />
         </Routes>
       </BrowserRouter>
