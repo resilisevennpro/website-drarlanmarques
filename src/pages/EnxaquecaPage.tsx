@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from "framer-motion";
 import { buildWhatsappLink } from '../lib/whatsapp';
 import { Seo, physicianSchema, faqSchema } from '../components/Seo';
+import { AtendimentoParticular } from '../components/AtendimentoParticular';
 
 import { 
   Menu, 
@@ -18,7 +19,8 @@ import {
   Phone,
   XCircle,
   Shield,
-  Snowflake
+  Snowflake,
+  Quote
 } from 'lucide-react';
 
 // --- Constants ---
@@ -235,7 +237,7 @@ const Hero = () => {
 
           <p className="font-sans text-slate-600 text-lg md:text-xl leading-relaxed mb-8 max-w-lg mx-auto md:mx-0">
             Tratamentos de alta precisão para <span className="text-slate-900 font-medium">ENXAQUECA e Dores Crônicas em Manaus.</span>
-            Recupere sua rotina com quem é especialista em tirar você do ciclo da dor e da dependência de analgésicos.
+            Recupere sua rotina com quem é especialista em tirar você do ciclo da dor e da dependência de analgésicos<span className="hidden md:inline"> - Atendimento Particular</span>
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
@@ -266,10 +268,11 @@ const Hero = () => {
 
 
 const InfiniteMarquee = () => {
-  const content = "DR. ARLAN MARQUES • NEUROCIRURGIÃO • ESPECIALISTA EM DOR •";
+  const contentMobile = "ATENDIMENTO PARTICULAR • ESPECIALISTA EM DOR • ATENDIMENTO PARTICULAR •";
+  const contentDesktop = "DR. ARLAN MARQUES • NEUROCIRURGIÃO • ESPECIALISTA EM DOR •";
 
   return (
-    <div className="bg-brand-navy py-6 overflow-hidden border-y border-brand-navy relative z-10">
+    <div className="bg-brand-navy py-2 overflow-hidden border-y border-brand-navy relative z-10">
       {/* Side Masks for smooth entry/exit */}
       <div className="absolute top-0 bottom-0 left-0 w-16 md:w-32 bg-gradient-to-r from-brand-navy to-transparent z-20"></div>
       <div className="absolute top-0 bottom-0 right-0 w-16 md:w-32 bg-gradient-to-l from-brand-navy to-transparent z-20"></div>
@@ -278,16 +281,18 @@ const InfiniteMarquee = () => {
         {/* First Loop */}
         <div className="flex animate-marquee min-w-full shrink-0 items-center">
            {[...Array(3)].map((_, i) => (
-             <span key={i} className="mx-12 text-lg md:text-2xl font-heading font-bold text-sky-400/90 tracking-widest uppercase">
-               {content}
+             <span key={i} className="mx-8 text-xs md:text-sm font-heading font-semibold text-sky-400/90 tracking-widest uppercase">
+               <span className="md:hidden">{contentMobile}</span>
+               <span className="hidden md:inline">{contentDesktop}</span>
              </span>
            ))}
         </div>
         {/* Second Loop (Duplicate for seamless scroll) */}
         <div className="flex animate-marquee min-w-full shrink-0 items-center" aria-hidden="true">
            {[...Array(3)].map((_, i) => (
-             <span key={i} className="mx-12 text-lg md:text-2xl font-heading font-bold text-sky-400/90 tracking-widest uppercase">
-               {content}
+             <span key={i} className="mx-8 text-xs md:text-sm font-heading font-semibold text-sky-400/90 tracking-widest uppercase">
+               <span className="md:hidden">{contentMobile}</span>
+               <span className="hidden md:inline">{contentDesktop}</span>
              </span>
            ))}
         </div>
@@ -308,7 +313,6 @@ const Symptoms = () => {
     <Section id="sintomas" className="bg-white relative">
       <div className="grid md:grid-cols-2 gap-12 items-center">
         <div>
-          <Badge>Isso é para você?</Badge>
           <h2 className="font-heading font-bold text-2xl md:text-4xl text-slate-900 mb-6">
             A dor de cabeça se tornou o centro da sua rotina?
           </h2>
@@ -601,7 +605,6 @@ const Journey = () => {
       </div>
 
       <div className="max-w-7xl mx-auto py-10 px-4 md:px-8 lg:px-10 text-center relative z-10">
-        <Badge className="mb-4">Transparência</Badge>
         <h2 className="font-heading font-bold text-2xl md:text-4xl text-slate-900 mb-4">
           O que esperar da sua consulta?
         </h2>
@@ -611,7 +614,7 @@ const Journey = () => {
       </div>
 
       {/* WRAP dos steps (onde o beam fica “preso”) */}
-      <div ref={stepsWrapRef} className="max-w-4xl mx-auto space-y-8 relative z-10 px-4 md:px-0">
+      <div ref={stepsWrapRef} className="max-w-4xl mx-auto space-y-5 relative z-10 px-4 md:px-0">
         {/* Beam (MOBILE ONLY) */}
         <div className="md:hidden pointer-events-none absolute left-[24px] top-0 bottom-0 z-0">
           {/* Linha base (cinza) */}
@@ -647,8 +650,8 @@ const Journey = () => {
             </div>
 
             {/* Card */}
-            <div className="flex-1 bg-brand-navy p-6 md:p-8 rounded-2xl border border-brand-navy shadow-lg hover:border-sky-500/40 transition-colors">
-              <h3 className="font-heading font-bold text-xl md:text-2xl text-white mb-3">
+            <div className="flex-1 bg-brand-navy p-4 md:p-5 rounded-2xl border border-brand-navy shadow-lg hover:border-sky-500/40 transition-colors">
+              <h3 className="font-heading font-bold text-lg md:text-xl text-white mb-1">
                 {step.title}
               </h3>
               <p className="text-slate-300 text-sm md:text-base leading-relaxed">
@@ -657,6 +660,8 @@ const Journey = () => {
             </div>
           </div>
         ))}
+
+        <AtendimentoParticular />
 
         <div className="text-center mt-12 pb-2">
           <Button
@@ -702,7 +707,6 @@ const Authority = () => {
           </div>
 
           <div className="w-full md:w-2/3">
-            <Badge>A Garantia</Badge>
             <h2 className="font-heading font-bold text-2xl md:text-4xl text-slate-900 mb-6">
               Experiência que traz segurança e precisão.
             </h2>
@@ -742,6 +746,46 @@ const Authority = () => {
   );
 };
 
+const DEPOIMENTOS = [
+  {
+    nome: 'Malena',
+    tag: 'Enxaqueca Crônica',
+    texto: 'Convivia há anos com enxaqueca crônica, dor praticamente todos os dias, e os remédios já não faziam mais efeito. Com o Dr. Arlan fiz o bloqueio para cefaleia e a mudança foi muito significativa: a intensidade e a frequência das crises diminuíram, e hoje vivo sem precisar tomar remédio para dor todos os dias.',
+  },
+  {
+    nome: 'Henrique',
+    tag: 'Dor de Cabeça Crônica',
+    texto: 'Meu pai está bem melhor das dores de cabeça. Desde sexta ele tem estado muito melhor das dores. Não que ele não sinta, mas são muito menos intensas e também bem menos frequentes que antes.',
+  },
+  {
+    nome: 'Larissa',
+    tag: 'Enxaqueca',
+    texto: 'Melhorei bastante. Dor de cabeça ainda estou sentindo, mas de forma bem sutil comparado a como eu estava sentindo antes. Estou me sentindo mais viva, estou me sentindo melhor.',
+  },
+];
+
+const Testimonials = () => {
+  return (
+    <Section className="bg-slate-50">
+      <div className="text-center max-w-2xl mx-auto mb-12">
+        <h2 className="font-heading font-bold text-2xl md:text-4xl text-slate-900 mb-2">DEPOIMENTOS</h2>
+        <p className="text-slate-600">Confira o que diz os pacientes!</p>
+      </div>
+
+      <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        {DEPOIMENTOS.map((d, i) => (
+          <div key={i} className="bg-brand-navy border border-white/10 rounded-2xl p-6">
+            <Quote className="w-6 h-6 text-sky-400 mb-3" />
+            <p className="text-slate-300 text-sm leading-relaxed mb-4">{d.texto}</p>
+            <p className="text-white font-medium text-sm">Paciente {d.nome}</p>
+            <p className="text-sky-400 text-xs">{d.tag}</p>
+          </div>
+        ))}
+      </div>
+    </Section>
+  );
+};
+
 const Location = () => {
   const images = [
     "/images/consultorio-01.webp",
@@ -753,7 +797,7 @@ const Location = () => {
   return (
     <Section id="localizacao" className="bg-white">
       <div className="text-center mb-12">
-        <Badge>Conveniência Premium</Badge>
+        <Badge>Nosso Consultório</Badge>
         <h2 className="font-heading font-bold text-2xl md:text-4xl text-slate-900 mb-4">
           Atendimento Premium na Ponta Negra
         </h2>
@@ -855,7 +899,7 @@ const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <Section className="max-w-4xl mx-auto bg-white">
+    <Section className="max-w-4xl md:max-w-[52rem] mx-auto bg-white">
       <div className="text-center mb-12">
         <h2 className="font-heading font-bold text-xl md:text-3xl text-slate-900 mb-4">Dúvidas Frequentes</h2>
       </div>
@@ -939,6 +983,7 @@ export default function EnxaquecaPage() {
       <ComparisonTable />
       <Journey />
       <Authority />
+      <Testimonials />
       <Location />
       <FAQ />
       <Footer />

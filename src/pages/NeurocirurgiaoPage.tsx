@@ -117,7 +117,7 @@ export default function NeurocirurgiaoPage() {
 
       {/* Experiência */}
       <div className="bg-brand-navy border-t border-white/10">
-        <Section className="py-12 md:py-14">
+        <Section className="py-6 md:py-8">
           <div className="grid md:grid-cols-[auto_1fr] gap-8 md:gap-16 items-center">
             <div className="hidden md:flex md:flex-col items-start justify-center md:border-r md:border-white/10 md:pr-16">
               <span className="font-heading text-6xl md:text-7xl font-black text-white leading-none tracking-tight">
@@ -133,7 +133,6 @@ export default function NeurocirurgiaoPage() {
                 <span className="md:hidden">
                   <span className="text-sky-400">+</span>15 Anos de Experiência em Neurocirurgia
                 </span>
-                <span className="hidden md:inline">Dr Arlan Marques</span>
               </h2>
               <p className="text-slate-300 leading-relaxed">
                 Dr. Arlan Marques une sólida formação acadêmica à prática constante em cirurgias de coluna.

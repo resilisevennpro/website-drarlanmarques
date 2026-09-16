@@ -9,7 +9,7 @@ import { AtendimentoParticular } from '../components/AtendimentoParticular';
 import { Contato } from '../components/Contato';
 import { WhatsappFloatButton } from '../components/WhatsappFloatButton';
 import { Seo, physicianSchema, breadcrumbSchema } from '../components/Seo';
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, Quote } from 'lucide-react';
 import { buildWhatsappLink } from '../lib/whatsapp';
 
 const WHATSAPP_MSG = "Olá, vim pelo site e gostaria de mais informações sobre o atendimento para tratamento de dores com o Dr Arlan...";
@@ -47,6 +47,39 @@ const DOENCAS = [
   'Hidrocefalia', 'Isquemia cerebral', 'Obstrução arterial',
   'Traumas e dor crônica na coluna vertebral', 'Traumatismos cranianos',
   'Tumores (cerebrais, da coluna e da medula)', 'Outro...',
+];
+
+const DEPOIMENTOS = [
+  {
+    nome: 'Ana Clara',
+    tag: 'Tratamento Clínico',
+    texto: 'Tive melhoras sim, com os remédios que o Dr. passou. Espero retornar até semana que vem.',
+  },
+  {
+    nome: 'Euza (relato da filha, Giselle)',
+    tag: 'Tratamento Clínico',
+    texto: 'Ela está outra pessoa, mais disposta. Até tá sorrindo.',
+  },
+  {
+    nome: 'Mirlene',
+    tag: 'Tratamento Clínico',
+    texto: 'Hoje minha mãezinha vive sem dor. Mais médicos com o senhor.',
+  },
+  {
+    nome: 'Cleitinho',
+    tag: 'Infiltração no Joelho',
+    texto: 'Dr. Arlan fez um tratamento no meu joelho que voltei a jogar bola... obrigado Dr.',
+  },
+  {
+    nome: 'Paciente',
+    tag: 'Dor de Cabeça e Bem-estar',
+    texto: 'Dormi de 10 horas da noite até 5 da manhã, num sono direto. Fazia tempo que isso não acontecia. Hoje fui malhar de novo, dei uma puxada de peso, e sem dor de cabeça.',
+  },
+  {
+    nome: 'Paciente',
+    tag: 'Dor nas Costas',
+    texto: 'Estou bem, não senti mais dor nenhuma. Só quando fico sentado um pouquinho que fico travado, mas levanto e ando sem dor.',
+  },
 ];
 
 export default function HomePage() {
@@ -88,7 +121,7 @@ export default function HomePage() {
 
       {/* Experiência */}
       <div className="bg-brand-navy border-t border-white/10">
-        <Section className="py-12 md:py-14">
+        <Section className="py-6 md:py-8">
           <div className="grid md:grid-cols-[auto_1fr] gap-8 md:gap-16 items-center">
             <div className="hidden md:flex md:flex-col items-start justify-center md:border-r md:border-white/10 md:pr-16">
               <span className="font-heading text-6xl md:text-7xl font-black text-white leading-none tracking-tight">
@@ -104,7 +137,6 @@ export default function HomePage() {
                 <span className="md:hidden">
                   <span className="text-sky-400">+</span>15 Anos de Experiência
                 </span>
-                <span className="hidden md:inline">Dr Arlan Marques</span>
               </h2>
               <p className="text-slate-300 leading-relaxed">
                 Na maioria dos casos, o tratamento adequado para dores crônicas e agudas pode ser
@@ -162,6 +194,27 @@ export default function HomePage() {
           </div>
 
           <AtendimentoParticular />
+        </Section>
+      </div>
+
+      {/* Depoimentos */}
+      <div className="bg-white">
+        <Section>
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <h2 className="font-heading text-2xl md:text-4xl font-bold text-slate-900 mb-2">DEPOIMENTOS</h2>
+            <p className="text-slate-600">Confira o que diz os Pacientes!</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            {DEPOIMENTOS.map((d, i) => (
+              <div key={i} className="bg-brand-navy border border-white/10 rounded-2xl p-6">
+                <Quote className="w-6 h-6 text-sky-400 mb-3" />
+                <p className="text-slate-300 text-sm leading-relaxed mb-4">{d.texto}</p>
+                <p className="text-white font-medium text-sm">Paciente {d.nome}</p>
+                <p className="text-sky-400 text-xs">{d.tag}</p>
+              </div>
+            ))}
+          </div>
         </Section>
       </div>
 
