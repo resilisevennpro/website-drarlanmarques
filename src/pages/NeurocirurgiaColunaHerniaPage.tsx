@@ -9,39 +9,49 @@ import { AcompanhamentoPosOperatorio } from '../components/AcompanhamentoPosOper
 import { Contato } from '../components/Contato';
 import { Hero } from '../components/Hero';
 import { Seo, physicianSchema, breadcrumbSchema } from '../components/Seo';
-import { Brain, CheckCircle2, Quote } from 'lucide-react';
+import { CheckCircle2, Quote } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { buildWhatsappLink } from '../lib/whatsapp';
 
-const WHATSAPP_MSG = 'Olá, vim através do site do Dr Arlan e gostaria de mais informações sobre aneurisma / tumor cerebral!';
+const WHATSAPP_MSG = 'Olá, vim através do site do Dr Arlan e gostaria de mais informações sobre cirurgia de coluna / hérnia de disco!';
 
 const DIAGNOSTICOS = [
-  { titulo: 'Aneurisma Cerebral', texto: 'Dilatação na parede de uma artéria do cérebro, muitas vezes silenciosa e descoberta em exames de rotina.' },
-  { titulo: 'Hemorragia Subaracnóidea', texto: 'Sangramento causado pela ruptura de um aneurisma - Emergência.' },
-  { titulo: 'Meningiomas', texto: 'Tumores, geralmente benignos, das membranas que envolvem o cérebro.' },
-  { titulo: 'Gliomas', texto: 'Tumores que se originam no próprio tecido cerebral.' },
-  { titulo: 'Metástases Cerebrais', texto: 'Lesões no cérebro originadas de tumores em outras partes do corpo.' },
+  { titulo: 'Espondilolistese e Anterolistese', texto: 'Escorregamento de vértebra, Graus 1 a 4.' },
+  { titulo: 'Espondilólise', texto: 'Fratura por estresse na coluna.' },
+  { titulo: 'Hérnia de Disco Extrusa', texto: 'Lombar e Cervical.' },
+  { titulo: 'Estenose de Canal Vertebral', texto: 'Estreitamento do canal da medula.' },
+  { titulo: 'Osteofitose', texto: 'Bico de Papagaio com compressão.' },
 ];
 
 const SINTOMAS = [
-  { titulo: 'Dor de Cabeça Súbita e Intensa', texto: '"A pior dor de cabeça da vida" - Sinal de Urgência.' },
-  { titulo: 'Dor de Cabeça Progressiva', texto: 'Que piora com o tempo, pior ao acordar ou acompanhada de vômitos.' },
-  { titulo: 'Crises Convulsivas', texto: 'Principalmente a primeira crise na vida adulta.' },
-  { titulo: 'Alterações na Visão', texto: 'Visão dupla, embaçada ou perda de parte do campo visual.' },
-  { titulo: 'Fraqueza ou Dormência', texto: 'Em um lado do corpo, no rosto, braço ou perna.' },
-  { titulo: 'Mudanças na Fala ou no Comportamento', texto: 'Confusão, esquecimento ou dificuldade para falar.' },
+  { titulo: 'Dor Ciática Grave', texto: 'Dor que irradia da lombar para a perna/pé.' },
+  { titulo: 'Pé Caído ou Perda de Força', texto: 'Dificuldade de mover o pé ou a perna - Sinal de Urgência.' },
+  { titulo: 'Formigamento e Dormência', texto: 'Nas mãos ou pés.' },
+  { titulo: 'Dor Cervical Irradiada', texto: 'Dor no pescoço que desce para os braços.' },
+  { titulo: 'Coluna Travada', texto: 'Dores agudas que impedem o movimento.' },
 ];
 
 const TRATAMENTOS = [
-  { titulo: 'Cirurgia de Aneurisma Cerebral', texto: 'Tratamento do aneurisma para excluí-lo da circulação e prevenir sangramentos, com planejamento individualizado para cada caso.' },
-  { titulo: 'Aneurisma Descoberto em Exame', texto: 'Avaliação do risco de ruptura para definir, com clareza, entre acompanhamento com exames ou tratamento preventivo.' },
-  { titulo: 'Cirurgia de Tumor Cerebral', texto: 'Remoção da lesão com o máximo de segurança, planejada a partir dos exames de imagem para preservar as funções neurológicas.' },
-  { titulo: 'Microcirurgia Cerebral', texto: 'Uso do microscópio cirúrgico para maior precisão e menor agressão aos tecidos saudáveis.' },
-  { titulo: 'Biópsia Cerebral', texto: 'Obtenção de amostra da lesão para um diagnóstico preciso e a definição do melhor tratamento.' },
-  { titulo: 'Segunda Opinião', texto: 'Revisão de exames e laudos para quem recebeu um diagnóstico e quer segurança antes de decidir.' },
+  { titulo: 'Hérnia de Disco (Lombar e Cervical)', imagem: '/images/wp/1-Hernia-de-Disco.png', texto: 'Tratamento definitivo para hérnias extrusas e dores ciáticas, com foco em preservação da mobilidade.' },
+  { titulo: 'Cirurgia Minimamente Invasiva', imagem: '/images/wp/2-Cirurgia-Minimamente-Invasiva.png', texto: 'Procedimentos por vídeo (Endoscopia) ou microscopia para rápida recuperação e menor agressão aos tecidos.' },
+  { titulo: 'Espondilolistese e Anterolistese', imagem: '/images/wp/3-Espondilolistese-e-Anterolistese.png', texto: 'Correção de escorregamentos vertebrais (Graus 1 a 4) e instabilidade da coluna com fixação segura.' },
+  { titulo: 'Estenose de Canal Vertebral', imagem: '/images/wp/4-Estenose-de-Canal-Vertebral.png', texto: 'Descompressão da medula e nervos para alívio de formigamentos, perda de força e dores nas pernas.' },
+  { titulo: 'Bloqueios e Infiltrações', imagem: '/images/wp/5-Bloqueios-e-Infiltracoes.png', texto: 'Procedimentos rápidos para alívio imediato da dor e diagnóstico preciso da origem do problema.' },
+  { titulo: 'Artrodese de Coluna', imagem: '/images/wp/6-Artrodese-de-Coluna.png', texto: 'Fusão vertebral moderna para casos de instabilidade grave, utilizando tecnologia de ponta.' },
 ];
 
 const DEPOIMENTOS = [
+  {
+    nome: 'Antônio',
+    tag: 'Cirurgia Coluna',
+    texto: `Eu cheguei ja fazer vários tratamentos e já estava cansado. A dor na coluna fazia parte de todos os meus dias. Tirava meu sono... meu trabalho... minha vida.
+
+Depois da cirurgia... tudo começou a mudar. A recuperação veio aos poucos... mas veio.
+
+Hoje eu caminho sem dor... durmo melhor... vivo melhor.
+
+Isso não é só uma cirurgia, apesar de ter alguns medos ao saber que precisava de cirurgia foi a melhor decisão que tomei para poder hj dizer que a cirurgia foi o passo para recuperar a própria vida.`,
+  },
   {
     nome: 'Maria Cecília',
     tag: 'Cirurgia Aneurisma',
@@ -75,43 +85,33 @@ Depois do tratamento intervencionista para meu caso que foi a radiofrequência p
 
 Um alívio, que me fez voltar a sorris, a brincar com meus netos e até voltar a sonha, graças ao Dr essa dor ficou pra trás!`,
   },
-  {
-    nome: 'Antônio',
-    tag: 'Cirurgia Coluna',
-    texto: `Eu cheguei ja fazer vários tratamentos e já estava cansado. A dor na coluna fazia parte de todos os meus dias. Tirava meu sono... meu trabalho... minha vida.
-
-Depois da cirurgia... tudo começou a mudar. A recuperação veio aos poucos... mas veio.
-
-Hoje eu caminho sem dor... durmo melhor... vivo melhor.
-
-Isso não é só uma cirurgia, apesar de ter alguns medos ao saber que precisava de cirurgia foi a melhor decisão que tomei para poder hj dizer que a cirurgia foi o passo para recuperar a própria vida.`,
-  },
 ];
 
-export default function NeurocirurgiaoPage() {
+export default function NeurocirurgiaColunaHerniaPage() {
   const whatsappLink = buildWhatsappLink(WHATSAPP_MSG);
 
   return (
     <SiteLayout whatsappMessage={WHATSAPP_MSG}>
       <Seo
-        title="Cirurgia de Aneurisma e Tumor Cerebral em Manaus | Dr. Arlan Marques"
-        description="Neurocirurgião em Manaus especializado em aneurismas e tumores cerebrais. Diagnóstico preciso, cirurgia com planejamento individualizado e acompanhamento do diagnóstico à recuperação, com Dr. Arlan Marques."
-        path="/neurocirurgiao"
+        title="Cirurgia de Coluna e Hérnia de Disco em Manaus | Dr. Arlan Marques"
+        description="Referência em cirurgia de coluna e hérnia de disco em Manaus. Técnicas minimamente invasivas (endoscopia, microcirurgia) para cervical e lombar, com Dr. Arlan Marques, neurocirurgião."
+        path="/neurocirurgiao-coluna-e-hernia"
         jsonLd={[
           physicianSchema,
           breadcrumbSchema([
             { name: 'Início', path: '/' },
             { name: 'Neurocirurgia', path: '/neurocirurgiao' },
+            { name: 'Coluna e Hérnia de Disco', path: '/neurocirurgiao-coluna-e-hernia' },
           ]),
         ]}
       />
       <Hero
-        title="Neurocirurgião em Manaus para Aneurismas e Tumores Cerebrais"
+        title="Referência em Cirurgia de Coluna e Hérnia de Disco em Manaus"
         description={
           <>
-            Diagnóstico preciso e cirurgia com <strong className="font-semibold">Planejamento Individualizado</strong> para
-            <em className="text-sky-300 not-italic"> aneurismas cerebrais e tumores do sistema nervoso.</em> Segurança
-            e clareza em cada decisão, do diagnóstico à recuperação.
+            Tratamentos modernos e <strong className="font-semibold">Técnicas Minimamente Invasivas</strong> para
+            patologias da <em className="text-sky-300 not-italic">Cervical e Lombar.</em> Recupere sua qualidade de
+            vida com segurança e atendimento exclusivo.
           </>
         }
         ctaLabel="Agendar Avaliação"
@@ -138,13 +138,13 @@ export default function NeurocirurgiaoPage() {
                 </span>
               </h2>
               <p className="text-slate-300 leading-relaxed">
-                Dr. Arlan Marques une sólida formação acadêmica à prática constante em neurocirurgia.
+                Dr. Arlan Marques une sólida formação acadêmica à prática constante em cirurgias de coluna.
               </p>
               <p className="text-slate-300 leading-relaxed mt-3">
-                Diante de um diagnóstico de aneurisma ou tumor cerebral, o foco é explicar com
-                clareza cada opção, avaliar o risco real de cada caso e indicar a cirurgia apenas
-                quando ela é o melhor caminho, com planejamento cuidadoso para preservar as funções
-                neurológicas.
+                O foco do atendimento é oferecer um diagnóstico preciso e indicar a intervenção
+                cirúrgica apenas quando necessário, priorizando técnicas como Endoscopia de Coluna
+                e Microcirurgia, que proporcionam cortes menores, menos dor pós-operatória e retorno
+                rápido à rotina.
               </p>
             </div>
           </div>
@@ -157,7 +157,7 @@ export default function NeurocirurgiaoPage() {
       <Section id="sintomas">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <h2 className="font-heading text-2xl md:text-4xl font-bold text-slate-900 mb-2">
-            Aneurismas, Tumores Cerebrais e Sinais de Alerta
+            Condições da Coluna e Sintomas de Alerta
           </h2>
           <p className="text-slate-600">Saiba quando é a hora de buscar uma avaliação especializada.</p>
         </div>
@@ -186,27 +186,18 @@ export default function NeurocirurgiaoPage() {
             </ul>
           </div>
         </div>
-
-        <p className="text-center text-slate-600 text-sm mt-8 max-w-xl mx-auto">
-          Dores de cabeça frequentes, que vão e voltam, costumam ter outra causa, como a enxaqueca.{' '}
-          <Link to="/enxaqueca" className="text-sky-700 font-medium underline underline-offset-2">
-            Conheça o tratamento
-          </Link>
-        </p>
       </Section>
 
       {/* Tratamentos e Cirurgias */}
       <Section id="tratamentos">
         <h2 className="font-heading text-2xl md:text-4xl font-bold text-slate-900 text-center mb-12">
-          Tratamentos Especializados em Neurocirurgia Cerebral
+          Tratamentos Especializados e Cirurgias da Coluna
         </h2>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {TRATAMENTOS.map((t) => (
             <div key={t.titulo} className="bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden">
-              <div className="h-24 bg-brand-navy flex items-center justify-center">
-                <Brain className="w-10 h-10 text-sky-400" />
-              </div>
+              <img src={t.imagem} alt={t.titulo} loading="lazy" className="w-full h-40 object-cover saturate-60 grayscale-[25%] contrast-90" />
               <div className="p-6">
                 <h3 className="font-heading text-lg font-bold text-slate-900 mb-2">{t.titulo}</h3>
                 <p className="text-slate-600 text-sm leading-relaxed">{t.texto}</p>
@@ -218,22 +209,20 @@ export default function NeurocirurgiaoPage() {
         <div className="mt-8 max-w-md mx-auto">
           <h4 className="text-sky-600 font-heading font-bold uppercase text-sm tracking-wide mb-3 text-center">Dentre outros como:</h4>
           <ul className="space-y-2">
-            <li className="flex items-center gap-3 justify-center">
-              <CheckCircle2 className="w-5 h-5 text-sky-600 shrink-0" />
-              <Link to="/neurocirurgiao-coluna-e-hernia" className="text-sky-700 text-sm underline underline-offset-2">
-                Cirurgia de Coluna e Hérnia de Disco
-              </Link>
-            </li>
-            <li className="flex items-center gap-3 justify-center">
-              <CheckCircle2 className="w-5 h-5 text-sky-600 shrink-0" />
-              <span className="text-slate-700 text-sm">Neuralgia do Trigêmeo</span>
-            </li>
+            {['Tumores do Sistema Nervoso', 'Aneurismas'].map((item) => (
+              <li key={item} className="flex items-center gap-3 justify-center">
+                <CheckCircle2 className="w-5 h-5 text-sky-600 shrink-0" />
+                <Link to="/neurocirurgiao" className="text-sky-700 text-sm underline underline-offset-2">
+                  {item}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
 
         <div className="text-center mt-12">
-          <p className="text-slate-700 mb-4">Agende sua avaliação e tire suas dúvidas com quem vai cuidar do seu caso.</p>
-          <Button href={whatsappLink} className="mx-auto">Agendar Avaliação</Button>
+          <p className="text-slate-700 mb-4">Agende sua Avaliação para resolver a sua dor o quanto antes!</p>
+          <Button href={whatsappLink} className="mx-auto">Descobrir melhor Tratamento</Button>
         </div>
       </Section>
 

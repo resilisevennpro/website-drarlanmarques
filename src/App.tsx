@@ -4,6 +4,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import EnxaquecaPage from './pages/EnxaquecaPage';
 import HomePage from './pages/HomePage';
 import NeurocirurgiaoPage from './pages/NeurocirurgiaoPage';
+import NeurocirurgiaColunaHerniaPage from './pages/NeurocirurgiaColunaHerniaPage';
 import BioPage from './pages/BioPage';
 import LinksPage from './pages/LinksPage';
 
@@ -32,6 +33,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/neurocirurgiao" element={<NeurocirurgiaoPage />} />
+          <Route path="/neurocirurgiao-coluna-e-hernia" element={<NeurocirurgiaColunaHerniaPage />} />
           <Route path="/bio" element={<BioPage />} />
           <Route path="/links" element={<LinksPage />} />
           <Route path="/enxaqueca" element={<EnxaquecaPage />} />

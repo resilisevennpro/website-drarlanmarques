@@ -2,10 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Instagram, MapPin, ChevronRight } from 'lucide-react';
 import { Seo, physicianSchema } from '../components/Seo';
+import { buildWhatsappLink } from '../lib/whatsapp';
 
 // Página /links: o "link da bio" do Instagram. Curta e sem menu — só foto,
 // botões para as páginas internas e, abaixo, localização e sobre o doutor.
-// O contato por WhatsApp acontece dentro de cada página de destino, não aqui.
+// O contato por WhatsApp acontece dentro de cada página de destino — a única
+// exceção é o acompanhamento pós-operatório, que vai direto para o WhatsApp.
 
 const LINKS = [
   {
@@ -20,8 +22,21 @@ const LINKS = [
   },
   {
     href: '/neurocirurgiao',
-    titulo: 'Neurocirurgia',
+    titulo: 'Aneurismas e tumores cerebrais',
     descricao: 'Quando a cirurgia é necessária, com segurança e experiência',
+  },
+  {
+    href: '/neurocirurgiao-coluna-e-hernia',
+    titulo: 'Cirurgia de coluna e hérnia de disco',
+    descricao: 'Técnicas minimamente invasivas para cervical e lombar',
+  },
+  {
+    href: buildWhatsappLink(
+      'Olá, vim através do site do Dr Arlan e gostaria de falar sobre o acompanhamento pós-operatório!'
+    ),
+    titulo: 'Acompanhamento pós-operatório',
+    descricao: 'Fale pelo WhatsApp sobre a sua recuperação',
+    externo: true,
   },
 ];
 
@@ -84,12 +99,10 @@ export default function LinksPage() {
         <div className="lg:min-w-0">
         {/* Botões */}
         <nav className="mt-10 lg:mt-2 flex flex-col gap-3">
-          {LINKS.map((link) => (
-            <Link
-              key={link.titulo}
-              to={link.href}
-              className="group flex items-center justify-between gap-4 rounded-2xl bg-brand-blue px-5 py-4 shadow-[0_4px_14px_rgba(56,111,163,0.25)] transition-all duration-300 hover:bg-brand-navy hover:shadow-[0_6px_20px_rgba(56,111,163,0.35)] active:scale-[0.98]"
-            >
+          {LINKS.map((link) => {
+            const className ="group flex items-center justify-between gap-4 rounded-2xl bg-brand-blue px-5 py-4 shadow-[0_4px_14px_rgba(56,111,163,0.25)] transition-all duration-300 hover:bg-brand-navy hover:shadow-[0_6px_20px_rgba(56,111,163,0.35)] active:scale-[0.98]";
+            const conteudo = (
+              <>
               <span className="min-w-0">
                 <span className="block font-heading font-bold text-white text-base leading-snug">
                   {link.titulo}
@@ -99,8 +112,18 @@ export default function LinksPage() {
                 </span>
               </span>
               <ChevronRight className="w-5 h-5 text-white shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
-          ))}
+              </>
+            );
+            return link.externo ? (
+              <a key={link.titulo} href={link.href} target="_blank" rel="noopener noreferrer" className={className}>
+                {conteudo}
+              </a>
+            ) : (
+              <Link key={link.titulo} to={link.href} className={className}>
+                {conteudo}
+              </Link>
+            );
+          })}
 
           <a
             href={INSTAGRAM_URL}
