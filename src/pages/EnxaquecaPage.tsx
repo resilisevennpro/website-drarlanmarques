@@ -996,6 +996,8 @@ export default function EnxaquecaPage({ isLp = true }: { isLp?: boolean }) {
         title="Tratamento de Enxaqueca e Dores de Cabeça em Manaus | Dr. Arlan Marques"
         description="Tratamentos de alta precisão para enxaqueca e dores crônicas de cabeça em Manaus, sem cirurgia: toxina botulínica, bloqueios e neuromodulação, com o neurocirurgião Dr. Arlan Marques."
         path="/enxaqueca"
+        canonicalPath="/enxaqueca"
+        noindex={isLp}
         jsonLd={[physicianSchema, faqSchema(FAQS)]}
       />
       {isLp ? <Navbar /> : <SiteNavbar whatsappMessage={WHATSAPP_MSG_ORGANICO} />}

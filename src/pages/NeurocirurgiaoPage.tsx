@@ -8,17 +8,40 @@ import { AtendimentoParticular } from '../components/AtendimentoParticular';
 import { AcompanhamentoPosOperatorio } from '../components/AcompanhamentoPosOperatorio';
 import { Contato } from '../components/Contato';
 import { Hero } from '../components/Hero';
-import { Seo, physicianSchema, breadcrumbSchema } from '../components/Seo';
+import { Seo, physicianSchema, breadcrumbSchema, faqSchema } from '../components/Seo';
 import { Brain, CheckCircle2, Quote } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { buildWhatsappLink } from '../lib/whatsapp';
 import { LpAnchorNavbar } from '../components/LpAnchorNavbar';
+import { Faq } from '../components/Faq';
 
 const LP_NAV_LINKS = [
   { name: 'Sintomas', href: '#sintomas' },
   { name: 'Tratamentos', href: '#tratamentos' },
+  { name: 'Dúvidas', href: '#duvidas' },
   { name: 'Sobre o Dr.', href: '#sobre' },
   { name: 'Localização', href: '#localizacao' },
+];
+
+// Respostas gerais e informativas — não substituem avaliação médica nem
+// prometem resultado ou técnica específica sem confirmação do Dr. Arlan.
+const FAQS = [
+  {
+    q: 'Todo aneurisma cerebral precisa de cirurgia?',
+    a: 'Não. Muitos aneurismas descobertos em exames de rotina, sem sintomas, são acompanhados com exames periódicos. A decisão de operar depende do risco de ruptura em cada caso, avaliado individualmente.',
+  },
+  {
+    q: 'Um tumor cerebral é sempre maligno (câncer)?',
+    a: 'Não. Existem tumores benignos, como a maioria dos meningiomas, e tumores malignos. O tipo, o tamanho e a localização do tumor é que definem o tratamento mais indicado.',
+  },
+  {
+    q: 'Como é feito o diagnóstico?',
+    a: 'Geralmente a partir de exames de imagem, como ressonância magnética ou tomografia, muitas vezes solicitados por causa de um sintoma ou até de forma incidental, em exame de rotina.',
+  },
+  {
+    q: 'Uma dor de cabeça forte é sinal de aneurisma ou tumor?',
+    a: 'Na maioria das vezes não. A grande maioria das dores de cabeça tem outras causas, como a enxaqueca. Mas uma dor súbita e muito intensa, diferente de qualquer outra já sentida, é sinal de alerta e exige avaliação de emergência.',
+  },
 ];
 
 // Mensagem dos botões da página. Difere entre acesso orgânico
@@ -113,12 +136,15 @@ export default function NeurocirurgiaoPage({ isLp = false }: { isLp?: boolean })
         title="Cirurgia de Aneurisma e Tumor Cerebral em Manaus | Dr. Arlan Marques"
         description="Neurocirurgião em Manaus especializado em aneurismas e tumores cerebrais. Diagnóstico preciso, cirurgia com planejamento individualizado e acompanhamento do diagnóstico à recuperação, com Dr. Arlan Marques."
         path="/neurocirurgiao"
+        canonicalPath="/neurocirurgiao"
+        noindex={isLp}
         jsonLd={[
           physicianSchema,
           breadcrumbSchema([
             { name: 'Início', path: '/' },
             { name: 'Neurocirurgia', path: '/neurocirurgiao' },
           ]),
+          faqSchema(FAQS),
         ]}
       />
       <Hero
@@ -279,6 +305,7 @@ export default function NeurocirurgiaoPage({ isLp = false }: { isLp?: boolean })
       <SobreDrArlan />
       <CuidadoAlemDaNeurocirurgia />
       <LocalAtendimento />
+      <Faq items={FAQS} />
       <Contato whatsappMessage={WHATSAPP_MSG} />
     </SiteLayout>
   );

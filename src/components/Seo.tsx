@@ -10,14 +10,19 @@ export const Seo = ({
   canonicalPath,
   image = '/images/wp/drarlan-bg2.webp',
   jsonLd,
+  noindex = false,
 }: {
   title: string;
   description: string;
   path: string;
-  /** Use quando a página tem conteúdo duplicado de outra (ex: /bio == /) para apontar o canonical para o original. */
+  /** Use quando a página tem conteúdo duplicado de outra para apontar o canonical para o original. */
   canonicalPath?: string;
   image?: string;
   jsonLd?: object | object[];
+  /** Use nas páginas de tráfego pago (lp.drarlanneuro.com/...), que duplicam
+   * o conteúdo da página orgânica — evita que concorram no Google e mantém
+   * só a versão orgânica indexável. */
+  noindex?: boolean;
 }) => {
   const url = `${SITE_URL}${path}`;
   const canonicalUrl = `${SITE_URL}${canonicalPath ?? path}`;
@@ -29,6 +34,7 @@ export const Seo = ({
       <title>{title}</title>
       <meta name="description" content={description} />
       <link rel="canonical" href={canonicalUrl} />
+      {noindex && <meta name="robots" content="noindex, follow" />}
 
       <meta property="og:type" content="website" />
       <meta property="og:title" content={title} />
