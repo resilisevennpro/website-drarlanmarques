@@ -1,8 +1,9 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from "framer-motion";
 import { buildWhatsappLink } from '../lib/whatsapp';
 import { Seo, physicianSchema, faqSchema } from '../components/Seo';
 import { AtendimentoParticular } from '../components/AtendimentoParticular';
+import { Navbar as SiteNavbar } from '../components/Navbar';
 
 import { 
   Menu, 
@@ -24,7 +25,16 @@ import {
 } from 'lucide-react';
 
 // --- Constants ---
-const WHATSAPP_LINK = buildWhatsappLink("Olá, vim através do site de *Enxaqueca e Dores de Cabeça* e gostaria de mais informações sobre a Consulta com o Dr Arlan...");
+// Mensagem dos botões do corpo da página (Hero, jornada, mapa, rodapé, FAB).
+// Difere entre acesso orgânico (/enxaqueca) e tráfego pago
+// (lp.drarlanneuro.com/enxaqueca), para identificar a origem do contato.
+const WHATSAPP_MSG_ORGANICO = "Olá, vim através do site de *Enxaqueca e Dores de Cabeça* e gostaria de mais informações sobre a Consulta com o Dr Arlan...";
+const WHATSAPP_MSG_LP = "Olá, vim através do Google pelo site de *Enxaqueca e Dores de Cabeça* e gostaria de mais informações sobre a Consulta com o Dr Arlan...";
+
+// Contexto com o link de WhatsApp já resolvido (orgânico vs. LP), consumido
+// pelos botões espalhados pelos subcomponentes desta página.
+const WhatsappLinkContext = createContext(buildWhatsappLink(WHATSAPP_MSG_ORGANICO));
+const useWhatsappLink = () => useContext(WhatsappLinkContext);
 
 const FAQS = [
   {
@@ -142,8 +152,15 @@ const Badge = ({ children, className = '' }: { children?: React.ReactNode, class
 
 // 2. Specific Sections
 
+// Navbar com âncoras (Sintomas, Tratamentos, Sobre o Dr., Localização) —
+// exclusiva da LP de tráfego pago (lp.drarlanneuro.com). Quando a página é
+// acessada via /enxaqueca dentro do site principal, usamos o Navbar
+// compartilhado (Home / Dores Crônicas / Enxaqueca / Neurocirurgia) em vez
+// desta, para o visitante conseguir navegar para as outras páginas. Ver
+// isLpHost em App.tsx e a prop `isLp` de EnxaquecaPage.
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const whatsappLink = useWhatsappLink();
 
   const navLinks = [
     { name: 'Sintomas', href: '#sintomas' },
@@ -172,7 +189,7 @@ const Navbar = () => {
                   {link.name}
                 </a>
               ))}
-              <Button variant="primary" className="!px-5 !py-2 !text-sm" href={WHATSAPP_LINK}>
+              <Button variant="primary" className="!px-5 !py-2 !text-sm" href={whatsappLink}>
                 Agendar Consulta
               </Button>
             </div>
@@ -205,7 +222,7 @@ const Navbar = () => {
               </a>
             ))}
             <div className="p-4">
-              <Button variant="primary" className="w-full justify-center" href={WHATSAPP_LINK}>
+              <Button variant="primary" className="w-full justify-center" href={whatsappLink}>
                 Agendar Consulta
               </Button>
             </div>
@@ -217,6 +234,7 @@ const Navbar = () => {
 };
 
 const Hero = () => {
+  const whatsappLink = useWhatsappLink();
   return (
     <div className="relative min-h-screen flex flex-col md:flex-row bg-white">
       {/* Background Gradient */}
@@ -241,7 +259,7 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
-            <Button icon={Calendar} className="w-fit mx-auto sm:mx-0 sm:w-auto" shimmer href={WHATSAPP_LINK}>
+            <Button icon={Calendar} className="w-fit mx-auto sm:mx-0 sm:w-auto" shimmer href={whatsappLink}>
               QUERO AGENDAR AVALIAÇÃO
             </Button>
           </div>
@@ -508,6 +526,7 @@ const ComparisonTable = () => {
 };
 
 const Journey = () => {
+  const whatsappLink = useWhatsappLink();
   const steps = useMemo(
     () => [
       {
@@ -669,7 +688,7 @@ const Journey = () => {
             icon={ArrowRight}
             className="w-fit md:w-auto shadow-lg shadow-sky-500/10"
             shimmer
-            href={WHATSAPP_LINK}
+            href={whatsappLink}
           >
             Começar minha jornada
           </Button>
@@ -932,6 +951,7 @@ const FAQ = () => {
 };
 
 const Footer = () => {
+  const whatsappLink = useWhatsappLink();
   return (
     <footer className="bg-brand-navy border-t border-slate-800 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4 md:px-8 text-center">
@@ -939,7 +959,7 @@ const Footer = () => {
           <h2 className="font-heading font-bold text-2xl md:text-4xl text-white mb-6">
             Não deixe a dor decidir como será o seu dia.
           </h2>
-          <Button variant="primary" className="w-fit mx-auto sm:w-auto text-lg py-4 px-6 md:px-8" icon={MessageCircle} shimmer href={WHATSAPP_LINK}>
+          <Button variant="primary" className="w-fit mx-auto sm:w-auto text-lg py-4 px-6 md:px-8" icon={MessageCircle} shimmer href={whatsappLink}>
             AGENDAR CONSULTA VIA WHATSAPP
           </Button>
         </div>
@@ -966,8 +986,11 @@ const Footer = () => {
 
 // 3. Main Layout Assembly
 
-export default function EnxaquecaPage() {
+export default function EnxaquecaPage({ isLp = true }: { isLp?: boolean }) {
+  const whatsappLink = buildWhatsappLink(isLp ? WHATSAPP_MSG_LP : WHATSAPP_MSG_ORGANICO);
+
   return (
+    <WhatsappLinkContext.Provider value={whatsappLink}>
     <main className="bg-white min-h-screen font-sans selection:bg-sky-500 selection:text-white overflow-x-hidden">
       <Seo
         title="Tratamento de Enxaqueca e Dores de Cabeça em Manaus | Dr. Arlan Marques"
@@ -975,7 +998,7 @@ export default function EnxaquecaPage() {
         path="/enxaqueca"
         jsonLd={[physicianSchema, faqSchema(FAQS)]}
       />
-      <Navbar />
+      {isLp ? <Navbar /> : <SiteNavbar whatsappMessage={WHATSAPP_MSG_ORGANICO} />}
       <Hero />
       <InfiniteMarquee />
       <Symptoms />
@@ -987,12 +1010,12 @@ export default function EnxaquecaPage() {
       <Location />
       <FAQ />
       <Footer />
-      
+
       {/* Floating Action Button for Mobile */}
       <div className="fixed bottom-6 right-6 z-50 md:hidden">
-        <a 
-          href={WHATSAPP_LINK} 
-          target="_blank" 
+        <a
+          href={whatsappLink}
+          target="_blank"
           rel="noopener noreferrer"
           className="bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg hover:shadow-green-500/30 transition-all active:scale-95 flex items-center justify-center"
         >
@@ -1000,5 +1023,6 @@ export default function EnxaquecaPage() {
         </a>
       </div>
     </main>
+    </WhatsappLinkContext.Provider>
   );
 }

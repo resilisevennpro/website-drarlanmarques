@@ -12,8 +12,20 @@ import { Seo, physicianSchema, breadcrumbSchema } from '../components/Seo';
 import { Brain, CheckCircle2, Quote } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { buildWhatsappLink } from '../lib/whatsapp';
+import { LpAnchorNavbar } from '../components/LpAnchorNavbar';
 
-const WHATSAPP_MSG = 'Olá, vim através do site do Dr Arlan e gostaria de mais informações sobre aneurisma / tumor cerebral!';
+const LP_NAV_LINKS = [
+  { name: 'Sintomas', href: '#sintomas' },
+  { name: 'Tratamentos', href: '#tratamentos' },
+  { name: 'Sobre o Dr.', href: '#sobre' },
+  { name: 'Localização', href: '#localizacao' },
+];
+
+// Mensagem dos botões da página. Difere entre acesso orgânico
+// (/neurocirurgiao) e tráfego pago (lp.drarlanneuro.com/neurocirurgiao),
+// para identificar a origem do contato.
+const WHATSAPP_MSG_ORGANICO = 'Olá, vim através do site do Dr Arlan e gostaria de mais informações sobre aneurisma / tumor cerebral!';
+const WHATSAPP_MSG_LP = 'Olá, vim através do Google pelo site de aneurisma / tumor cerebral e gostaria de mais informações...';
 
 const DIAGNOSTICOS = [
   { titulo: 'Aneurisma Cerebral', texto: 'Dilatação na parede de uma artéria do cérebro, muitas vezes silenciosa e descoberta em exames de rotina.' },
@@ -88,11 +100,15 @@ Isso não é só uma cirurgia, apesar de ter alguns medos ao saber que precisava
   },
 ];
 
-export default function NeurocirurgiaoPage() {
+export default function NeurocirurgiaoPage({ isLp = false }: { isLp?: boolean }) {
+  const WHATSAPP_MSG = isLp ? WHATSAPP_MSG_LP : WHATSAPP_MSG_ORGANICO;
   const whatsappLink = buildWhatsappLink(WHATSAPP_MSG);
 
   return (
-    <SiteLayout whatsappMessage={WHATSAPP_MSG}>
+    <SiteLayout
+      whatsappMessage={WHATSAPP_MSG}
+      navbar={isLp ? <LpAnchorNavbar navLinks={LP_NAV_LINKS} whatsappMessage={WHATSAPP_MSG} /> : undefined}
+    >
       <Seo
         title="Cirurgia de Aneurisma e Tumor Cerebral em Manaus | Dr. Arlan Marques"
         description="Neurocirurgião em Manaus especializado em aneurismas e tumores cerebrais. Diagnóstico preciso, cirurgia com planejamento individualizado e acompanhamento do diagnóstico à recuperação, com Dr. Arlan Marques."

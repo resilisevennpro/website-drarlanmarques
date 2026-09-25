@@ -94,7 +94,7 @@ export default function NeurocirurgiaColunaHerniaPage() {
     <SiteLayout whatsappMessage={WHATSAPP_MSG}>
       <Seo
         title="Cirurgia de Coluna e Hérnia de Disco em Manaus | Dr. Arlan Marques"
-        description="Referência em cirurgia de coluna e hérnia de disco em Manaus. Técnicas minimamente invasivas (endoscopia, microcirurgia) para cervical e lombar, com Dr. Arlan Marques, neurocirurgião."
+        description="Especialista em cirurgia de coluna e hérnia de disco em Manaus. Técnicas minimamente invasivas (endoscopia, microcirurgia) para cervical e lombar, com Dr. Arlan Marques, neurocirurgião."
         path="/neurocirurgiao-coluna-e-hernia"
         jsonLd={[
           physicianSchema,
@@ -106,7 +106,7 @@ export default function NeurocirurgiaColunaHerniaPage() {
         ]}
       />
       <Hero
-        title="Referência em Cirurgia de Coluna e Hérnia de Disco em Manaus"
+        title="Especialista em Cirurgia de Coluna e Hérnia de Disco em Manaus"
         description={
           <>
             Tratamentos modernos e <strong className="font-semibold">Técnicas Minimamente Invasivas</strong> para
