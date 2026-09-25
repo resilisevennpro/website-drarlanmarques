@@ -211,6 +211,17 @@ export default function LinksPage() {
           <p className="text-slate-400 text-xs mt-1">
             Conteúdo informativo. Não substitui consulta médica.
           </p>
+          <p className="text-slate-400 text-xs mt-2">
+            Desenvolvido por{' '}
+            <a
+              href="https://instagram.com/resilisevenn"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-sky-600 transition-colors"
+            >
+              Resili Sevenn
+            </a>
+          </p>
         </footer>
         </div>
       </main>

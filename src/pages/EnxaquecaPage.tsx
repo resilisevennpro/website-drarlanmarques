@@ -979,6 +979,17 @@ const Footer = () => {
         <div className="mt-8 text-xs text-slate-400">
           &copy; {new Date().getFullYear()} Dr. Arlan Marques. Todos os direitos reservados.
         </div>
+        <div className="mt-2 text-xs text-slate-400">
+          Desenvolvido por{' '}
+          <a
+            href="https://instagram.com/resilisevenn"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-sky-400 transition-colors"
+          >
+            Resili Sevenn
+          </a>
+        </div>
       </div>
     </footer>
   );
